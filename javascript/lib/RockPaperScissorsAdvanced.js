@@ -1,12 +1,10 @@
 //define class player
 function Player(name) {
   this.name = name;
-  // console.log("New player created")
 }
 //define method picks
 Player.prototype.picks = function(pick) {
 	this.pick = pick;
-	//console.log("I am here");
 }
 //define class game
 function Game(player1, player2) {
@@ -16,9 +14,11 @@ function Game(player1, player2) {
 
 //define constant of class Game
 Game.prototype.PAIRS = {
-    'rock':     { 'beats': 'scissors' },
-    'paper':    { 'beats': 'rock' },
-    'scissors': { 'beats': 'paper' }
+    'rock':     { 'beats': ['scissors', 'lizard'] },
+    'paper':    { 'beats': ['rock', 'spock'] },
+    'scissors': { 'beats': ['paper', 'lizard']},
+    'lizard':   { 'beats': ['spock', 'paper']},
+    'spock':    { 'beats': ['scissors', 'rock']}
 }
 
 //define method winner
@@ -26,7 +26,7 @@ Game.prototype.winner = function() {
   if(this.samePick()){
     return null
   }
-  if (this.PAIRS[this.player1.pick]['beats'] === this.player2.pick) {
+  if (this.PAIRS[this.player1.pick]['beats'][0] === this.player2.pick || this.PAIRS[this.player1.pick]['beats'][1] === this.player2.pick) {
     return this.player1
   }
   return this.player2
