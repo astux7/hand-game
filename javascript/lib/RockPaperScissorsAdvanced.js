@@ -4,7 +4,7 @@ function Player(name) {
 }
 //define method picks
 Player.prototype.picks = function(pick) {
-	this.pick = pick;
+	this.pick = new Pick(player.pick);
 }
 //define class game
 function Game(player1, player2) {
@@ -13,29 +13,40 @@ function Game(player1, player2) {
 }
 
 //define constant of class Game
-Game.prototype.PAIRS = {
-    'rock':     { 'beats': ['scissors', 'lizard'] },
-    'paper':    { 'beats': ['rock', 'spock'] },
+Pick.prototype.PAIRS = {
+    'rock':     { 'beats': ['scissors', 'lizard']},
+    'paper':    { 'beats': ['rock', 'spock']},
     'scissors': { 'beats': ['paper', 'lizard']},
     'lizard':   { 'beats': ['spock', 'paper']},
-    'spock':    { 'beats': ['scissors', 'rock']}
+    'spock':    { 'rock': 'vaporizes', 'scissors': 'melts'}
+}
+
+Pick.prototype.beats = function(otherPick){
+  var veb = this.PAIRS[this.name][otherPick.name];
+
+  if (veb){
+    return[this.name, veb, otherPick.name].join( );
+    else{
+    return false;
+
+  }
 }
 
 //define method winner
 Game.prototype.winner = function() {
-  if(this.samePick()){
-    return null
-  }
-  if (this.PAIRS[this.player1.pick]['beats'][0] === this.player2.pick 
-    || this.PAIRS[this.player1.pick]['beats'][1] === this.player2.pick) {
-    return this.player1
-  }
-  return this.player2
+  var p1Win = this.player1.pick.beats(this.player1.pick);
+  var p2Win = this.player2.pick.beats(this.player2.pick);
+
+  if (p1Win) return p1Win;
+  if (p2Win) return p2Win;
+  
+  return 'draw';
 }
 //define method samePick
 Game.prototype.samePick = function() {
-	if (this.player1.pick === this.player2.pick){
-		return true;
-	}
-	return false;
+	return this.player1.pick === this.player2.pick{
+}
+
+function Pick(name){
+  this.name = name;
 }
