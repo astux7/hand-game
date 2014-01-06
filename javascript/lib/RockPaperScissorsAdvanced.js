@@ -26,7 +26,8 @@ Game.prototype.winner = function() {
   if(this.samePick()){
     return null
   }
-  if (this.PAIRS[this.player1.pick]['beats'][0] === this.player2.pick || this.PAIRS[this.player1.pick]['beats'][1] === this.player2.pick) {
+  if (this.PAIRS[this.player1.pick]['beats'][0] === this.player2.pick 
+    || this.PAIRS[this.player1.pick]['beats'][1] === this.player2.pick) {
     return this.player1
   }
   return this.player2
