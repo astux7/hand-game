@@ -1,5 +1,6 @@
+// Pick class
 function Pick(name) {
-  this.name = name;
+  this.name = typeof name !== 'undefined' ? name : this.makeRandomPick();
 }
 
 Pick.prototype.pairs = {
@@ -18,6 +19,14 @@ Pick.prototype.beats = function(otherPick) {
   } else {
     return false;
   }
+}
+
+Pick.prototype.makeRandomPick = function(){
+  var keys = [];
+  for (var key in this.pairs) {
+    keys.push(key);
+  }
+  return keys[Math.floor(Math.random()*keys.length)];
 }
 
 // Player class
@@ -39,8 +48,8 @@ Game.prototype.winner = function() {
   var p2Wins = this.player2.pick.beats(this.player1.pick);
 
   // console.log(p1Wins || p2Wins || 'draw');
-  if(p1Wins) return p1Wins;
-  if(p2Wins) return p2Wins;
+  if(p1Wins) return p1Wins+" 1";
+  if(p2Wins) return p2Wins+" 2";
   
-  return 'Draw';
+  return 'Draw 0';
 }

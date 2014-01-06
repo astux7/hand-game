@@ -22,6 +22,14 @@
   </head>
   <body>
     <h1>Rock Paper Scissors Lizard Spock</h1>
+    <div><img src="images/human.png">
+    <span id="human">0</span>
+    </div>
+    <div><img src="images/pc.png">
+    <span id="pc">0</span>
+    </div>
+    <h3 id="result">&nbsp;</h3>
+
     <div class='choices'>
       <img src="images/rock.png" data-pick='rock'>
       <img src="images/paper.png" data-pick='paper'>
@@ -29,8 +37,6 @@
       <img src="images/lizard.png" data-pick='lizard'>
       <img src="images/spock.png" data-pick='spock'>
     </div>
-    <h3 id="result"></h3>
-
     <script src='http://code.jquery.com/jquery-2.0.3.js'></script>
     <script src='lib/RockPaperScissors.js'></script>
     <script>
@@ -41,12 +47,22 @@
         var game = new Game(player1, player2);
 
         $('.choices img').on('click', function() {
+          var choicesArray = [];
           var humanPick = $(this).data('pick');
-
           player1.picks(humanPick);
-          player2.picks('lizard');
+          player2.picks();
+          var result = game.winner();
+          var winner = result.slice(-1);
+          if (winner == '1'){
+            var number = 1+parseInt($('#human').text(),10);
+            $('#human').text(number);
+          }
+          else {
+            var number = 1+parseInt($('#pc').text(),10);
+            $('#pc').text(number);
+          }
 
-          $('#result').text(game.winner());
+          $('#result').text(result.substring(0, result.length - 1));
         })
       })
     </script>
