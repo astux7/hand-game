@@ -51,5 +51,5 @@ Game.prototype.winner = function() {
   if(p1Wins) return p1Wins+" 1";
   if(p2Wins) return p2Wins+" 2";
   
-  return 'Draw 0';
+  return 'Draw';
 }
